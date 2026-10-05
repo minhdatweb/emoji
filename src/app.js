@@ -134,18 +134,26 @@ $("#btn-theme").addEventListener("click", () => {
 });
 
 // ---- Đánh dấu nhóm đang xem trên thanh điều hướng ----
-const chips = new Map($$(".chip").map((c) => [c.dataset.g, c]));
-const io = new IntersectionObserver(
-  (entries) => {
-    for (const en of entries) {
-      if (!en.isIntersecting) continue;
-      chips.forEach((c) => c.classList.remove("on"));
-      chips.get(en.target.id)?.classList.add("on");
-    }
-  },
-  { rootMargin: "-40% 0px -55% 0px" }
-);
-groups.forEach((g) => io.observe(g));
+// Nhóm đang xem = nhóm cuối cùng có mép trên đã chạm dưới header.
+// Bấm chip thì giữ đúng nhóm đó (nhóm cuối trang không cuộn được tới mép header) cho tới khi người dùng tự cuộn.
+const chips = new Map($$(".nav .chip").map((c) => [c.dataset.g, c]));
+let picked = null;
+function markChip(id) {
+  chips.forEach((c, g) => c.classList.toggle("on", g === id));
+}
+function updateChip() {
+  if (picked) return markChip(picked);
+  const line = $(".site-header").offsetHeight + 24;
+  let current = null;
+  for (const g of groups) if (!g.hidden && g.getBoundingClientRect().top <= line) current = g.id;
+  markChip(current ?? groups.find((g) => !g.hidden)?.id);
+}
+chips.forEach((c, id) => c.addEventListener("click", () => { picked = id; markChip(id); }));
+const release = () => { picked = null; };
+["wheel", "touchmove", "keydown"].forEach((ev) => addEventListener(ev, release, { passive: true }));
+addEventListener("scroll", updateChip, { passive: true }); // chỉ ~9 nhóm, tính trực tiếp đủ nhẹ
+input.addEventListener("input", () => { picked = null; updateChip(); });
+updateChip();
 
 applyTone(store.get("emoji-tone", ""));
 renderRecent();
