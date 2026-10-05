@@ -91,4 +91,5 @@ body.writing #toast { bottom: 96px; }
 
 /* Trang kí tự: dùng font chữ thường thay vì font emoji, ô rộng hơn cho kí tự ghép (【】, ꧁꧂) */
 [data-page="ki-tu"] .grid { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); }
-[data-page="ki-tu"] .e { aspect-ratio: auto; height: 56px; font-family: inherit; font-size: 24px; color: var(--text); white-space: nowrap; }
+/* Ưu tiên font kí hiệu đơn sắc: font chữ thường thiếu glyph (❣ ✴ ☸…) thì Windows tự lấy font emoji màu */
+[data-page="ki-tu"] .e { aspect-ratio: auto; height: 56px; font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Noto Sans Symbols", "Apple Symbols", -apple-system, "Segoe UI", sans-serif; font-size: 24px; color: var(--text); white-space: nowrap; }

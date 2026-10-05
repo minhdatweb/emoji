@@ -29,9 +29,6 @@ export default [
 ❂ mặt trời sao
 ✴ sao tám cánh
 ✵ sao chong chóng
-⭐ sao vàng
-🌟 sao lấp lánh
-✨ lấp lánh
 ˚ chấm sao nhỏ
 ｡ chấm tròn nhỏ
 ﾟ chấm nhỏ
@@ -48,13 +45,6 @@ export default [
 დ tim nghiêng
 ɞ tim mở
 ☙ hoa lá tim
-💕 hai trái tim
-💖 tim lấp lánh
-💗 tim lớn dần
-💓 tim đập
-💞 tim xoay vòng
-💘 tim mũi tên
-💝 tim nơ
 ♥︎ tim chữ
 `],
   ["mui-ten", ["Mũi tên", "Mũi tên", "→"], "mui ten arrow huong", `
@@ -112,14 +102,11 @@ export default [
 ✓ dấu tick
 ✔ dấu tick đậm
 ☑ ô có tick
-✅ tick xanh
 ✗ dấu x
 ✘ dấu x đậm
 ☒ ô có x
 ✕ dấu nhân x
 ✖ dấu x đen
-❌ x đỏ
-❎ x xanh
 ☐ ô trống checkbox
 ▢ ô vuông trống
 ⊠ ô gạch chéo
@@ -156,12 +143,6 @@ export default [
 ☽ trăng khuyết trái
 ☾ trăng khuyết phải
 ☄ sao chổi
-⚡ sét
-☔ ô mưa
-🌸 hoa anh đào
-🌷 hoa tulip
-🌹 hoa hồng
-🍀 cỏ bốn lá
 `],
   ["hinh-hoc", ["Hình học", "Hình học", "◆"], "hinh vuong tron tam giac shape", `
 ● chấm tròn đen
@@ -425,7 +406,6 @@ $ đô la dollar
 ⚠ cảnh báo
 ☠ đầu lâu
 ⚔ kiếm chéo
-⚓ mỏ neo
 `],
   ["dau-cau", ["Dấu câu & Ký hiệu", "Dấu câu", "©"], "dau cau ky hieu ban quyen", `
 © bản quyền copyright
