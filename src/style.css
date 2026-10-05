@@ -93,3 +93,32 @@ body.writing #toast { bottom: 96px; }
 [data-page="ki-tu"] .grid { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); }
 /* Ưu tiên font kí hiệu đơn sắc: font chữ thường thiếu glyph (❣ ✴ ☸…) thì Windows tự lấy font emoji màu */
 [data-page="ki-tu"] .e { aspect-ratio: auto; height: 56px; font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Noto Sans Symbols", "Apple Symbols", -apple-system, "Segoe UI", sans-serif; font-size: 24px; color: var(--text); white-space: nowrap; }
+
+/* Trang kaomoji: ô rộng, chữ thường */
+[data-page="kaomoji"] .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+[data-page="kaomoji"] .e { aspect-ratio: auto; height: 52px; padding: 0 8px; font-family: inherit; font-size: 17px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Trang chữ kiểu: không có ô tìm và thanh nhóm, ô nhập chữ nằm trong trang */
+[data-page="chu-kieu"] .header-inner .search-box, [data-page="chu-kieu"] .toolbar, [data-page="chu-kieu"] #recent { display: none; }
+.gen { padding-top: 32px; }
+.gen-input-box { display: block; }
+.gen-input-box input {
+  width: 100%; max-width: 560px; height: 52px; padding: 0 16px;
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 20px;
+}
+.gen-input-box input:focus-visible { outline: 0; border-color: var(--blue); box-shadow: 0 0 0 3px var(--focus-ring); }
+.gen-frames { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 24px; }
+.gen-frames .chip { height: 34px; padding: 0 10px; cursor: pointer; color: var(--text); }
+.gen-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 8px; }
+.gen-row {
+  display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 12px;
+  height: auto; min-height: 56px; aspect-ratio: auto; padding: 8px 14px; text-align: left;
+  border-color: var(--line); font-family: inherit; color: var(--text);
+}
+.gen-name { color: var(--muted); font-size: 13px; }
+.gen-out { font-size: 20px; line-height: 1.4; overflow-wrap: anywhere; }
+.gen-note { margin: 24px 0 0; color: var(--muted); font-size: 13px; }
+@media (max-width: 760px) {
+  .gen-list { grid-template-columns: 1fr; }
+  .gen-row { grid-template-columns: 1fr; gap: 2px; }
+}

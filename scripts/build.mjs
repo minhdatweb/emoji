@@ -1,9 +1,12 @@
 // Xuất trang tĩnh vào dist/: mỗi trang = 1 bộ dữ liệu chia nhóm, dùng chung khung src/index.html
 //   /        Emoji: dữ liệu chuẩn Unicode + tên tiếng Việt (CLDR)
-//   /ki-tu/  Kí tự đặc biệt: data/ki-tu.mjs
+//   /ki-tu/     Kí tự đặc biệt: data/ki-tu.mjs
+//   /chu-kieu/  Tạo chữ kiểu: chạy trên trình duyệt (src/chu-kieu.js)
+//   /kaomoji/   Kaomoji: data/kaomoji.mjs
 import { readFileSync, writeFileSync, mkdirSync, rmSync, copyFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import kiTu from "../data/ki-tu.mjs";
+import kaomoji from "../data/kaomoji.mjs";
 
 const require = createRequire(import.meta.url);
 const SITE = "https://emoji.minhdat.me";
@@ -16,6 +19,8 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g
 const PAGES = [
   { path: "/", tab: "Emoji", build: buildEmoji },
   { path: "/ki-tu/", tab: "Kí tự", build: buildKiTu },
+  { path: "/chu-kieu/", tab: "Chữ kiểu", build: buildChuKieu },
+  { path: "/kaomoji/", tab: "Kaomoji", build: buildKaomoji },
 ];
 
 // ---------- Emoji ----------
@@ -76,24 +81,29 @@ function buildEmoji() {
   };
 }
 
-// ---------- Kí tự đặc biệt ----------
-function buildKiTu() {
-  // Kí tự vừa là chữ vừa là emoji (↗ ✡ ❤ ☀…): thêm U+FE0E để luôn hiện dạng chữ đơn sắc, cả khi dán sang nơi khác
-  const emojiKeys = new Set(Object.keys(require("unicode-emoji-json/data-by-emoji.json")));
-  const asText = (c) => ([...c].length === 1 && emojiKeys.has(c + "️") ? c + "︎" : c);
-  const groups = kiTu.map(([slug, meta, groupKeys, list]) => ({
+// Dữ liệu dạng [slug, meta, từ khoá nhóm, "kí tự<sep>tên\n…"] → nhóm
+function parseList(data, sep, fix = (c) => c) {
+  return data.map(([slug, meta, groupKeys, list]) => ({
     slug,
     meta,
     items: list
       .trim()
       .split("\n")
       .map((line) => {
-        const i = line.indexOf(" ");
+        const i = line.indexOf(sep);
         const char = i < 0 ? line : line.slice(0, i);
         const name = i < 0 ? meta[0] : line.slice(i + 1).trim();
-        return { char: asText(char), name, keys: `${name} ${meta[0]} ${groupKeys}` };
+        return { char: fix(char), name, keys: `${name} ${meta[0]} ${groupKeys}` };
       }),
   }));
+}
+
+// ---------- Kí tự đặc biệt ----------
+function buildKiTu() {
+  // Kí tự vừa là chữ vừa là emoji (↗ ✡ ❤ ☀…): thêm U+FE0E để luôn hiện dạng chữ đơn sắc, cả khi dán sang nơi khác
+  const emojiKeys = new Set(Object.keys(require("unicode-emoji-json/data-by-emoji.json")));
+  const asText = (c) => ([...c].length === 1 && emojiKeys.has(c + "️") ? c + "︎" : c);
+  const groups = parseList(kiTu, " ", asText);
   const total = groups.reduce((n, g) => n + g.items.length, 0);
   return {
     groups,
@@ -101,6 +111,37 @@ function buildKiTu() {
     title: `Kí tự đặc biệt — Bấm là copy ${total}+ kí tự`,
     desc: `Kí tự đặc biệt đẹp để đặt tên Facebook, TikTok, game: ngôi sao ★, trái tim ♡, mũi tên ➜, khung tên ꧁꧂, số ①, đường kẻ. Bấm một lần là copy.`,
     placeholder: "Tìm kí tự…",
+  };
+}
+
+// ---------- Kaomoji ----------
+function buildKaomoji() {
+  const groups = parseList(kaomoji, "\t");
+  const total = groups.reduce((n, g) => n + g.items.length, 0);
+  return {
+    groups,
+    title: `Kaomoji — ${total}+ mặt cười kí tự (◕‿◕) bấm là copy`,
+    desc: "Kaomoji mặt cười bằng kí tự Nhật: vui (＾▽＾), yêu (♡˙︶˙♡), buồn (╥﹏╥), lật bàn (╯°□°）╯︵ ┻━┻, nhún vai ¯\\_(ツ)_/¯. Bấm một lần là copy.",
+    placeholder: "Tìm kaomoji, vd: vui, ôm, lật bàn…",
+  };
+}
+
+// ---------- Chữ kiểu (tạo trên trình duyệt) ----------
+function buildChuKieu() {
+  return {
+    groups: [],
+    main: `<section class="gen">
+    <label class="gen-input-box">
+      <input id="gen-input" type="text" placeholder="Minh Đạt" autocomplete="off" aria-label="Nhập chữ cần đổi kiểu">
+    </label>
+    <div id="gen-frames" class="gen-frames" aria-label="Khung trang trí"></div>
+    <div id="gen-list" class="gen-list"></div>
+    <p class="gen-note">Chữ có dấu tiếng Việt hiển thị tuỳ máy và ứng dụng: một số kiểu có thể lệch dấu. Chữ đ/Đ không có bản kiểu nên giữ nguyên.</p>
+  </section>`,
+    script: "/chu-kieu.js",
+    title: "Chữ kiểu — Tạo tên kí tự đặc biệt đẹp cho Facebook, TikTok, game",
+    desc: "Gõ tên, chọn kiểu chữ đậm, viết tay, gothic, nét đôi, khoanh tròn, khung ꧁ ꧂ để đặt tên Facebook, TikTok, Free Fire, Liên Quân. Bấm là copy.",
+    placeholder: "",
   };
 }
 
@@ -124,6 +165,7 @@ function render(page, data) {
 
   return template
     .replace(tonesHtml, data.tones ? tonesHtml : "")
+    .replace("{{SCRIPT}}", data.script ? `<script src="${data.script}"></script>` : "")
     .replace("{{TITLE}}", esc(data.title))
     .replace("{{DESC}}", esc(data.desc))
     .replace("{{CANONICAL}}", SITE + page.path)
@@ -131,7 +173,7 @@ function render(page, data) {
     .replace("{{PAGE}}", page.path === "/" ? "emoji" : page.path.replaceAll("/", ""))
     .replace("{{TABS}}", tabs)
     .replace("{{NAV}}", nav.join(""))
-    .replace("{{SECTIONS}}", sections.join("\n"));
+    .replace("{{SECTIONS}}", data.main || sections.join("\n"));
 }
 
 rmSync("dist", { recursive: true, force: true });
@@ -142,6 +184,6 @@ for (const page of PAGES) {
   mkdirSync(dir, { recursive: true });
   writeFileSync(dir + "index.html", render(page, data));
   const count = data.groups.reduce((n, g) => n + g.items.length, 0);
-  console.log(`✓ ${page.path.padEnd(8)} ${count} mục, ${data.groups.length} nhóm`);
+  console.log(`✓ ${page.path.padEnd(11)} ${data.main ? "trang tạo chữ" : `${count} mục, ${data.groups.length} nhóm`}`);
 }
-for (const f of ["base.css", "style.css", "app.js", "favicon.svg", "logo.svg"]) copyFileSync(`src/${f}`, `dist/${f}`);
+for (const f of ["base.css", "style.css", "app.js", "chu-kieu.js", "favicon.svg", "logo.svg"]) copyFileSync(`src/${f}`, `dist/${f}`);

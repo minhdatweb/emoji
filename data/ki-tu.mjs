@@ -1,7 +1,7 @@
 // Kí tự đặc biệt theo nhóm. Mỗi dòng: "<kí tự> <tên tìm kiếm>". Dòng không có tên thì tìm theo từ khoá nhóm.
 // slug, [tên đầy đủ, tên ngắn, icon], từ khoá nhóm, danh sách
 export default [
-  ["ngoi-sao", ["Ngôi sao", "Ngôi sao", "★"], "sao star", `
+  ["ngoi-sao", ["Ngôi sao","Ngôi sao","★"], "sao star", `
 ★ sao đen đặc
 ☆ sao trắng rỗng
 ✦ sao bốn cánh đen
@@ -33,7 +33,7 @@ export default [
 ｡ chấm tròn nhỏ
 ﾟ chấm nhỏ
 `],
-  ["trai-tim", ["Trái tim", "Trái tim", "♥"], "tim tinh yeu heart love", `
+  ["trai-tim", ["Trái tim","Trái tim","♥"], "tim tinh yeu heart love", `
 ♥ tim đen
 ♡ tim trắng rỗng
 ❤ tim đậm
@@ -47,7 +47,7 @@ export default [
 ☙ hoa lá tim
 ♥︎ tim chữ
 `],
-  ["mui-ten", ["Mũi tên", "Mũi tên", "→"], "mui ten arrow huong", `
+  ["mui-ten", ["Mũi tên","Mũi tên","→"], "mui ten arrow huong", `
 → mũi tên phải
 ← mũi tên trái
 ↑ mũi tên lên
@@ -98,23 +98,7 @@ export default [
 › ngoặc nhọn phải
 ‹ ngoặc nhọn trái
 `],
-  ["dau-tick", ["Dấu check & X", "Check & X", "✓"], "dung sai check tick x", `
-✓ dấu tick
-✔ dấu tick đậm
-☑ ô có tick
-✗ dấu x
-✘ dấu x đậm
-☒ ô có x
-✕ dấu nhân x
-✖ dấu x đen
-☐ ô trống checkbox
-▢ ô vuông trống
-⊠ ô gạch chéo
-⊗ x trong tròn
-⊕ cộng trong tròn
-⦿ chấm trong tròn
-`],
-  ["hoa-la", ["Hoa lá & Thiên nhiên", "Hoa lá", "✿"], "hoa la flower thien nhien", `
+  ["hoa-la", ["Hoa lá & Thiên nhiên","Hoa lá","✿"], "hoa la flower thien nhien", `
 ✿ hoa đen
 ❀ hoa trắng
 ❁ hoa viền
@@ -144,7 +128,7 @@ export default [
 ☾ trăng khuyết phải
 ☄ sao chổi
 `],
-  ["hinh-hoc", ["Hình học", "Hình học", "◆"], "hinh vuong tron tam giac shape", `
+  ["hinh-hoc", ["Hình học & Check","Hình học","◆"], "hinh vuong tron tam giac shape dung sai check tick x", `
 ● chấm tròn đen
 ○ tròn trắng
 ◎ tròn kép
@@ -188,8 +172,22 @@ export default [
 ‣ tam giác đầu dòng
 ⁃ gạch đầu dòng
 ∙ chấm giữa
+✓ dấu tick
+✔ dấu tick đậm
+☑ ô có tick
+✗ dấu x
+✘ dấu x đậm
+☒ ô có x
+✕ dấu nhân x
+✖ dấu x đen
+☐ ô trống checkbox
+▢ ô vuông trống
+⊠ ô gạch chéo
+⊗ x trong tròn
+⊕ cộng trong tròn
+⦿ chấm trong tròn
 `],
-  ["khung-ngoac", ["Khung & Ngoặc", "Ngoặc", "【】"], "ngoac khung bracket ten", `
+  ["khung-ngoac", ["Khung & Ngoặc","Ngoặc","【】"], "ngoac khung bracket ten", `
 【】 ngoặc vuông đậm
 〖〗 ngoặc vuông rỗng
 「」 ngoặc góc
@@ -216,7 +214,7 @@ export default [
 彡 sóng ba nét
 ミ sóng mi
 `],
-  ["duong-ke", ["Đường kẻ & Trang trí", "Đường kẻ", "━"], "duong ke vien trang tri line border", `
+  ["duong-ke", ["Đường kẻ & Trang trí","Đường kẻ","━"], "duong ke vien trang tri line border", `
 ━ kẻ ngang đậm
 ─ kẻ ngang mảnh
 ═ kẻ ngang kép
@@ -259,7 +257,48 @@ export default [
 ✧˖° lấp lánh trang trí
 ⋆｡°✩ sao trang trí
 `],
-  ["so", ["Số đặc biệt", "Số", "①"], "so number khoanh tron", `
+  ["toan-tien", ["Số, Toán & Tiền tệ","Số & Toán","①"], "toan hoc tien te math currency so number khoanh tron", `
+± cộng trừ
+× nhân
+÷ chia
+≈ xấp xỉ
+≠ khác
+≤ nhỏ hơn hoặc bằng
+≥ lớn hơn hoặc bằng
+∞ vô cực
+√ căn bậc hai
+∑ tổng sigma
+∏ tích
+∫ tích phân
+∆ delta tam giác
+∂ đạo hàm riêng
+π pi
+µ micro
+° độ
+‰ phần nghìn
+∈ thuộc
+∉ không thuộc
+⊂ tập con
+∪ hợp
+∩ giao
+∀ với mọi
+∃ tồn tại
+∴ vì vậy
+∵ bởi vì
+∅ tập rỗng
+∠ góc
+⊥ vuông góc
+∥ song song
+₫ đồng việt nam vnd
+$ đô la dollar
+€ euro
+£ bảng anh
+¥ yên nhật nhân dân tệ
+₩ won hàn
+₿ bitcoin
+¢ cent
+₹ rupee
+₽ rúp
 ① số 1 khoanh tròn
 ② số 2 khoanh tròn
 ③ số 3 khoanh tròn
@@ -322,92 +361,7 @@ export default [
 Ⅸ số la mã 9
 Ⅹ số la mã 10
 `],
-  ["toan-tien", ["Toán học & Tiền tệ", "Toán & Tiền", "±"], "toan hoc tien te math currency", `
-± cộng trừ
-× nhân
-÷ chia
-≈ xấp xỉ
-≠ khác
-≤ nhỏ hơn hoặc bằng
-≥ lớn hơn hoặc bằng
-∞ vô cực
-√ căn bậc hai
-∑ tổng sigma
-∏ tích
-∫ tích phân
-∆ delta tam giác
-∂ đạo hàm riêng
-π pi
-µ micro
-° độ
-‰ phần nghìn
-∈ thuộc
-∉ không thuộc
-⊂ tập con
-∪ hợp
-∩ giao
-∀ với mọi
-∃ tồn tại
-∴ vì vậy
-∵ bởi vì
-∅ tập rỗng
-∠ góc
-⊥ vuông góc
-∥ song song
-₫ đồng việt nam vnd
-$ đô la dollar
-€ euro
-£ bảng anh
-¥ yên nhật nhân dân tệ
-₩ won hàn
-₿ bitcoin
-¢ cent
-₹ rupee
-₽ rúp
-`],
-  ["am-nhac", ["Âm nhạc & Trò chơi", "Nhạc & Game", "♫"], "am nhac music game bai co", `
-♪ nốt nhạc đơn
-♫ nốt nhạc đôi
-♬ nốt nhạc móc đôi
-♩ nốt đen
-♭ dấu giáng
-♯ dấu thăng
-𝄞 khoá sol
-♠ bích đen
-♣ chuồn đen
-♥ cơ
-♦ rô
-♤ bích trắng
-♧ chuồn trắng
-♡ cơ trắng
-♢ rô trắng
-♔ vua trắng cờ vua
-♕ hậu trắng
-♖ xe trắng
-♗ tượng trắng
-♘ mã trắng
-♙ tốt trắng
-♚ vua đen
-♛ hậu đen
-♜ xe đen
-♝ tượng đen
-♞ mã đen
-♟ tốt đen
-⚀ xúc xắc 1
-⚁ xúc xắc 2
-⚂ xúc xắc 3
-⚃ xúc xắc 4
-⚄ xúc xắc 5
-⚅ xúc xắc 6
-☯ âm dương
-☮ hoà bình
-☢ phóng xạ
-☣ sinh học nguy hiểm
-⚠ cảnh báo
-☠ đầu lâu
-⚔ kiếm chéo
-`],
-  ["dau-cau", ["Dấu câu & Ký hiệu", "Dấu câu", "©"], "dau cau ky hieu ban quyen", `
+  ["dau-cau", ["Kí hiệu khác","Kí hiệu","©"], "dau cau ky hieu ban quyen am nhac music game bai co", `
 © bản quyền copyright
 ® đã đăng ký
 ™ thương hiệu trademark
@@ -452,5 +406,45 @@ $ đô la dollar
 ✌ chiến thắng
 ☺ mặt cười
 ☹ mặt buồn
+♪ nốt nhạc đơn
+♫ nốt nhạc đôi
+♬ nốt nhạc móc đôi
+♩ nốt đen
+♭ dấu giáng
+♯ dấu thăng
+𝄞 khoá sol
+♠ bích đen
+♣ chuồn đen
+♥ cơ
+♦ rô
+♤ bích trắng
+♧ chuồn trắng
+♡ cơ trắng
+♢ rô trắng
+♔ vua trắng cờ vua
+♕ hậu trắng
+♖ xe trắng
+♗ tượng trắng
+♘ mã trắng
+♙ tốt trắng
+♚ vua đen
+♛ hậu đen
+♜ xe đen
+♝ tượng đen
+♞ mã đen
+♟ tốt đen
+⚀ xúc xắc 1
+⚁ xúc xắc 2
+⚂ xúc xắc 3
+⚃ xúc xắc 4
+⚄ xúc xắc 5
+⚅ xúc xắc 6
+☯ âm dương
+☮ hoà bình
+☢ phóng xạ
+☣ sinh học nguy hiểm
+⚠ cảnh báo
+☠ đầu lâu
+⚔ kiếm chéo
 `],
 ];

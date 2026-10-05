@@ -46,7 +46,7 @@ function search() {
 input.addEventListener("input", search);
 document.addEventListener("keydown", (ev) => {
   const typing = ["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName);
-  if (ev.key === "/" && !typing) { ev.preventDefault(); input.focus(); }
+  if (ev.key === "/" && !typing) { ev.preventDefault(); ($("#gen-input") || input).focus(); }
   if (ev.key === "Escape" && document.activeElement === input) { input.value = ""; search(); }
 });
 
@@ -79,12 +79,13 @@ function renderRecent() {
 document.addEventListener("click", async (ev) => {
   const b = ev.target.closest(".e");
   if (!b) return;
-  const emoji = b.textContent;
+  const emoji = b.dataset.copy ?? b.textContent;
   if (writeOn) insertAtCaret(emoji);
   else {
     await copy(emoji);
-    showToast(`Đã copy ${emoji}  ${b.title}`);
+    showToast(b.dataset.copy ? `Đã copy kiểu ${b.title}` : `Đã copy ${emoji}  ${b.title}`);
   }
+  if (b.dataset.copy) return; // chữ kiểu dài, không đưa vào "Dùng gần đây"
   const list = store.get("emoji-recent", []).filter(([e]) => e !== emoji);
   store.set("emoji-recent", [[emoji, b.title], ...list].slice(0, 24));
   renderRecent();
