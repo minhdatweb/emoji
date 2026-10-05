@@ -4,7 +4,11 @@ html { scroll-padding-top: calc(var(--header-h, 200px) + 8px); }
 /* Header dính trên. Dòng 1: logo | ô tìm + nút soạn + nút sáng/tối (phải). Dòng 2: 9 nhóm | màu da (phải) */
 .site-header { position: sticky; top: 0; z-index: 10; }
 .header-inner { display: flex; align-items: center; gap: 8px; }
-.brand { margin-right: auto; }
+.brand { margin-right: 24px; }
+/* Tab giữa các trang (Emoji · Kí tự …): chữ xám, trang hiện tại xanh có gạch dưới */
+.tabs { display: flex; gap: 20px; margin-right: auto; }
+.tabs a { padding: 7px 0 6px; border-bottom: 1px solid transparent; color: var(--muted); text-decoration: none; }
+.tabs a:hover, .tabs a.on { color: var(--blue); border-bottom-color: currentColor; }
 .brand-mark { width: 28px; height: 28px; }
 .header-inner .search-box { width: 340px; height: 40px; }
 .actions { display: flex; gap: 8px; }
@@ -31,6 +35,9 @@ html { scroll-padding-top: calc(var(--header-h, 200px) + 8px); }
   /* Mobile: logo + 2 nút trên, ô tìm hàng riêng; dưới là màu da rồi 9 nhóm cuộn ngang */
   .header-inner { flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; }
   .header-inner .search-box { order: 3; width: 100%; }
+  .brand { margin-right: 12px; }
+  .brand strong { display: none; }
+  .tabs { gap: 14px; }
   .toolbar { flex-direction: column-reverse; align-items: stretch; gap: 10px; }
   .tones { align-self: flex-start; }
   .nav { margin: 0 -20px; padding: 0 20px; }
@@ -81,3 +88,7 @@ main { padding-bottom: 64px; }
 .write .btn { height: 48px; }
 body.writing main { padding-bottom: 120px; }
 body.writing #toast { bottom: 96px; }
+
+/* Trang kí tự: dùng font chữ thường thay vì font emoji, ô rộng hơn cho kí tự ghép (【】, ꧁꧂) */
+[data-page="ki-tu"] .grid { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); }
+[data-page="ki-tu"] .e { aspect-ratio: auto; height: 56px; font-family: inherit; font-size: 24px; color: var(--text); white-space: nowrap; }

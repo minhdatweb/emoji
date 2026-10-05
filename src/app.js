@@ -24,7 +24,7 @@ function applyTone(tone) {
   }
   store.set("emoji-tone", tone);
 }
-$(".tones").addEventListener("click", (ev) => {
+$(".tones")?.addEventListener("click", (ev) => {
   const b = ev.target.closest("button");
   if (b) applyTone(b.dataset.tone);
 });

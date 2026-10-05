@@ -3,21 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kho Emoji — Bấm là copy {{TOTAL}} emoji</title>
-<meta name="description" content="Kho {{TOTAL}} emoji chuẩn Unicode, tên tiếng Việt, tìm nhanh, bấm một lần là copy. Đủ 9 nhóm: cảm xúc, con người, động vật, đồ ăn, du lịch, hoạt động, đồ vật, biểu tượng, cờ.">
-<link rel="canonical" href="https://emoji.minhdat.me/">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+<link rel="canonical" href="{{CANONICAL}}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>try{const t=JSON.parse(localStorage.getItem("emoji-theme"));if(t)document.documentElement.dataset.theme=t}catch{}</script>
-<link rel="stylesheet" href="base.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/base.css">
+<link rel="stylesheet" href="/style.css">
 </head>
-<body>
+<body data-page="{{PAGE}}">
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="brand"><img class="brand-mark" src="logo.svg" alt="" width="28" height="28"><strong>Kho Emoji</strong></a>
+    <a href="/" class="brand"><img class="brand-mark" src="/logo.svg" alt="" width="28" height="28"><strong>Kho Emoji</strong></a>
+    <nav class="tabs">{{TABS}}</nav>
     <label class="search-box">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-      <input id="q" type="search" placeholder="Tìm emoji…" autocomplete="off">
+      <input id="q" type="search" placeholder="{{PLACEHOLDER}}" autocomplete="off">
       <kbd>/</kbd>
     </label>
     <div class="actions">
@@ -32,14 +33,14 @@
   </div>
   <div class="container toolbar">
     <nav class="nav">{{NAV}}</nav>
-    <div class="tones" role="group" aria-label="Màu da">
+    <!--TONES--><div class="tones" role="group" aria-label="Màu da">
       <button data-tone="" class="on" title="Mặc định">✋</button>
       <button data-tone="🏻" title="Da sáng">✋🏻</button>
       <button data-tone="🏼" title="Da sáng vừa">✋🏼</button>
       <button data-tone="🏽" title="Da trung bình">✋🏽</button>
       <button data-tone="🏾" title="Da ngăm vừa">✋🏾</button>
       <button data-tone="🏿" title="Da ngăm">✋🏿</button>
-    </div>
+    </div><!--/TONES-->
   </div>
 </header>
 
@@ -65,6 +66,6 @@
 </div>
 
 <div id="toast" role="status" aria-live="polite"></div>
-<script src="app.js"></script>
+<script src="/app.js"></script>
 </body>
 </html>
