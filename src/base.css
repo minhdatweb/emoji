@@ -1,0 +1,119 @@
+/* Style nền dùng chung cho các dự án của Minh Đạt: nền trắng, bo 5px, tiêu đề 600, xanh dương làm điểm nhấn.
+ * Chỉ chứa token + thành phần chung (header, footer, ô tìm, chip, kbd). Style riêng của từng dự án để ở style.css. */
+:root {
+  --surface: #ffffff;
+  --surface-soft: #f6f8fa;
+  --surface-muted: #eaeef2;
+  --text: #24292f;
+  --muted: #57606a;
+  --line: #d8dee4;
+  --line-strong: #d0d7de;
+  --line-hover: #c2cad3;
+  --blue: #0969da;
+  --blue-soft: #edf4ff;
+  --blue-line: #dbe7fb;
+  --focus-ring: rgba(9, 105, 218, .2);
+  --shadow: 0 3px 12px rgba(27, 31, 36, .06);
+  --radius: 5px;
+  --container: 1280px;
+  --fs-h1: clamp(28px, 3vw, 36px);
+  --fs-h2: 24px;
+  --fs-h3: 16px;
+  --header-bg: rgba(255, 255, 255, .96);
+  color-scheme: light;
+}
+
+/* Giao diện tối: theo máy khi chưa chọn, hoặc khi người dùng chọn data-theme="dark" */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #0d1117; --surface-soft: #161b22; --surface-muted: #21262d;
+    --text: #e6edf3; --muted: #8d96a0;
+    --line: #30363d; --line-strong: #3d444d; --line-hover: #4d5560;
+    --blue: #4493f8; --blue-soft: #121d2f; --blue-line: #1f3b63;
+    --focus-ring: rgba(68, 147, 248, .3); --shadow: 0 3px 12px rgba(0, 0, 0, .4);
+    --header-bg: rgba(13, 17, 23, .96);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --surface: #0d1117; --surface-soft: #161b22; --surface-muted: #21262d;
+  --text: #e6edf3; --muted: #8d96a0;
+  --line: #30363d; --line-strong: #3d444d; --line-hover: #4d5560;
+  --blue: #4493f8; --blue-soft: #121d2f; --blue-line: #1f3b63;
+  --focus-ring: rgba(68, 147, 248, .3); --shadow: 0 3px 12px rgba(0, 0, 0, .4);
+  --header-bg: rgba(13, 17, 23, .96);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { overflow-y: scroll; scrollbar-gutter: stable; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 15px;
+  line-height: 1.5;
+}
+a { color: inherit; }
+button, input, textarea { font: inherit; }
+h1, h2, h3 { font-weight: 600; line-height: 1.2; }
+:where(a, button, input, textarea):focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* Khung nội dung */
+.container { width: min(calc(100% - 32px), var(--container)); margin: 0 auto; padding: 0 32px; }
+@media (max-width: 760px) { .container { width: 100%; padding: 0 20px; } }
+
+/* Header */
+.site-header { background: var(--header-bg); border-bottom: 1px solid var(--line); }
+.header-inner { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand strong { font-size: 16px; font-weight: 600; }
+
+/* Ô tìm kiếm cao 48px */
+.search-box {
+  display: flex; align-items: center; gap: 12px;
+  height: 48px; padding: 0 12px 0 16px;
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface);
+}
+.search-box:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px var(--focus-ring); }
+.search-box svg { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
+.search-box input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: transparent; color: var(--text); font-size: 16px; }
+.search-box input:focus-visible { outline: 0; }
+kbd { padding: 2px 6px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-soft); color: var(--muted); font-family: inherit; font-size: 12px; font-weight: 500; }
+
+/* Chip: bộ lọc / điều hướng nhanh, góc 5px */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
+  font-size: 14px; text-decoration: none; white-space: nowrap;
+}
+.chip:hover { border-color: var(--line-strong); box-shadow: var(--shadow); }
+.chip.on { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+
+/* Nút chữ và nút icon vuông */
+.btn { height: 40px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--text); cursor: pointer; }
+.btn:hover { border-color: var(--line-hover); box-shadow: var(--shadow); }
+.btn.primary { border-color: var(--blue); background: var(--blue); color: #fff; }
+.icon-btn { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--muted); cursor: pointer; }
+.icon-btn:hover { border-color: var(--line-strong); color: var(--text); }
+.icon-btn[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+.icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Nút đổi sáng/tối: hiện mặt trăng ở nền sáng, mặt trời ở nền tối */
+.i-sun { display: none; }
+:root[data-theme="dark"] .i-sun { display: block; }
+:root[data-theme="dark"] .i-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .i-sun { display: block; }
+  :root:not([data-theme="light"]) .i-moon { display: none; }
+}
+
+/* Ô đếm số cạnh tiêu đề */
+.count { display: inline-grid; place-items: center; min-width: 28px; height: 26px; padding: 0 9px; border-radius: var(--radius); background: var(--surface-muted); color: var(--muted); font-size: 14px; font-weight: 500; }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--line); }
+.footer-inner { min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 18px; color: var(--muted); font-size: 13px; }
+.footer-inner a { color: var(--blue); text-decoration: none; }

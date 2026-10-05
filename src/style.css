@@ -1,0 +1,83 @@
+/* Style riêng của Kho Emoji — token và thành phần chung ở base.css */
+html { scroll-padding-top: calc(var(--header-h, 200px) + 8px); }
+
+/* Header dính trên. Dòng 1: logo | ô tìm + nút soạn + nút sáng/tối (phải). Dòng 2: 9 nhóm | màu da (phải) */
+.site-header { position: sticky; top: 0; z-index: 10; }
+.header-inner { display: flex; align-items: center; gap: 8px; }
+.brand { margin-right: auto; }
+.brand-mark { width: 28px; height: 28px; }
+.header-inner .search-box { width: 340px; height: 40px; }
+.actions { display: flex; gap: 8px; }
+.toolbar { display: flex; align-items: center; gap: 16px; padding-bottom: 12px; }
+.nav { flex: 1; min-width: 0; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.chip { flex: none; height: 34px; padding: 0 10px; }
+
+.tones { justify-self: end; }
+.brand-mark { width: 28px; height: 28px; }
+.search-box { height: 40px; }
+.toolbar { padding-bottom: 12px; }
+.nav { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.chip { flex: none; height: 34px; padding: 0 10px; }
+
+.tones { flex: none; display: flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius); }
+.tones button { width: 32px; height: 32px; padding: 0; border: 0; border-radius: var(--radius); background: none; font-size: 18px; cursor: pointer; }
+.tones button:hover { background: var(--surface-soft); }
+.tones button.on { background: var(--blue-soft); box-shadow: inset 0 0 0 1px var(--blue); }
+
+@media (max-width: 760px) {
+  .tones button { width: 28px; height: 28px; font-size: 15px; }
+  /* Mobile: logo + 2 nút trên, ô tìm hàng riêng; dưới là màu da rồi 9 nhóm cuộn ngang */
+  .header-inner { flex-wrap: wrap; padding-top: 12px; padding-bottom: 10px; }
+  .header-inner .search-box { order: 3; width: 100%; }
+  .toolbar { flex-direction: column-reverse; align-items: stretch; gap: 10px; }
+  .tones { align-self: flex-start; }
+  .nav { margin: 0 -20px; padding: 0 20px; }
+}
+
+/* Lưới emoji */
+main { padding-bottom: 64px; }
+.group { padding-top: 32px; }
+.group h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; font-size: var(--fs-h2); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 4px; }
+.e {
+  aspect-ratio: 1; padding: 0; border: 1px solid transparent; border-radius: var(--radius); background: none; cursor: pointer;
+  font-size: 30px; line-height: 1.2;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  transition: background .12s, border-color .12s;
+}
+.e:hover { background: var(--surface-soft); border-color: var(--line); }
+.e:active { background: var(--blue-soft); border-color: var(--blue-line); }
+.e[hidden], .group[hidden] { display: none; }
+@media (max-width: 760px) {
+  .group { padding-top: 24px; }
+  .group h2 { font-size: 20px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); }
+  .e { font-size: 26px; }
+}
+
+.empty { padding: 60px 0; color: var(--muted); text-align: center; }
+
+/* Thông báo đã copy */
+#toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 16px);
+  max-width: calc(100% - 32px); padding: 10px 16px;
+  border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow);
+  opacity: 0; pointer-events: none; transition: .2s;
+}
+#toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* Khung soạn dính đáy (chế độ soạn) */
+.write { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--header-bg); border-top: 1px solid var(--line); box-shadow: 0 -3px 12px rgba(27, 31, 36, .06); }
+.write[hidden] { display: none; }
+.write-inner { display: flex; align-items: center; gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+.write textarea {
+  flex: 1; min-width: 0; height: 48px; padding: 11px 14px; resize: none;
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--text);
+  font-size: 18px; line-height: 1.4;
+}
+.write textarea:focus-visible { outline: 0; border-color: var(--blue); box-shadow: 0 0 0 3px var(--focus-ring); }
+.write .btn { height: 48px; }
+body.writing main { padding-bottom: 120px; }
+body.writing #toast { bottom: 96px; }
