@@ -12,6 +12,9 @@ const store = {
 const buttons = $$(".group:not(#recent) .e");
 const groups = $$(".group:not(#recent)");
 const recentBox = $("#recent");
+// "Dùng gần đây" lưu riêng từng trang: kaomoji/kí tự không lẫn vào lưới emoji
+const RECENT_KEY = "recent-" + document.body.dataset.page;
+const escHtml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 const toast = $("#toast");
 
 // ---- Màu da ----
@@ -69,9 +72,9 @@ async function copy(text) {
 }
 
 function renderRecent() {
-  const list = store.get("emoji-recent", []);
+  const list = store.get(RECENT_KEY, []);
   $(".grid", recentBox).innerHTML = list
-    .map(([e, name]) => `<button class="e" title="${name}" aria-label="${name}">${e}</button>`)
+    .map(([e, name]) => `<button class="e" title="${escHtml(name)}" aria-label="${escHtml(name)}">${escHtml(e)}</button>`)
     .join("");
   recentBox.hidden = !list.length || !!input.value.trim();
 }
@@ -86,8 +89,8 @@ document.addEventListener("click", async (ev) => {
     showToast(b.dataset.copy ? `Đã copy kiểu ${b.title}` : `Đã copy ${emoji}  ${b.title}`);
   }
   if (b.dataset.copy) return; // chữ kiểu dài, không đưa vào "Dùng gần đây"
-  const list = store.get("emoji-recent", []).filter(([e]) => e !== emoji);
-  store.set("emoji-recent", [[emoji, b.title], ...list].slice(0, 24));
+  const list = store.get(RECENT_KEY, []).filter(([e]) => e !== emoji);
+  store.set(RECENT_KEY, [[emoji, b.title], ...list].slice(0, 24));
   renderRecent();
 });
 
