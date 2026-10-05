@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- Nguồn ảnh xem trước khi gửi link (src/og-image.png). Chụp lại: npm run og -->
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    display: grid; grid-template-columns: 1fr 470px; align-items: center; gap: 40px;
+    padding: 0 80px; background: #fff; color: #24292f;
+    font-family: "Segoe UI", -apple-system, sans-serif;
+    border-bottom: 12px solid #0969da;
+  }
+  .brand { display: flex; align-items: center; gap: 22px; }
+  .brand img { width: 104px; height: 104px; }
+  h1 { font-size: 76px; font-weight: 600; letter-spacing: -1px; }
+  p { margin-top: 28px; font-size: 32px; line-height: 1.4; color: #57606a; }
+  .tags { display: flex; gap: 12px; margin-top: 36px; }
+  .tags span { padding: 8px 18px; border: 2px solid #d8dee4; border-radius: 8px; font-size: 26px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .grid div {
+    display: grid; place-items: center; height: 100px; border-radius: 10px; background: #f6f8fa;
+    font-size: 54px; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  }
+  .grid .t { font-family: "Segoe UI Symbol", "Segoe UI", sans-serif; font-size: 50px; color: #24292f; }
+  .grid .k { grid-column: span 2; font-family: "Segoe UI", sans-serif; font-size: 36px; color: #24292f; }
+</style>
+</head>
+<body>
+  <div>
+    <div class="brand"><img src="../src/logo.svg" alt=""><h1>Kho Emoji</h1></div>
+    <p>Bấm một lần là copy.<br>Tìm bằng tiếng Việt.</p>
+    <div class="tags"><span>Emoji</span><span>Kí tự</span><span>Chữ kiểu</span><span>Kaomoji</span></div>
+  </div>
+  <div class="grid">
+    <div>😂</div><div>🥰</div><div>🔥</div><div>👍</div>
+    <div class="t">★</div><div class="t">♡</div><div class="k">꧁ 𝓜𝓭 ꧂</div>
+    <div class="k">(◕‿◕)</div><div>🎉</div><div class="t">➜</div>
+  </div>
+</body>
+</html>

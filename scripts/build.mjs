@@ -166,9 +166,9 @@ function render(page, data) {
   return template
     .replace(tonesHtml, data.tones ? tonesHtml : "")
     .replace("{{SCRIPT}}", data.script ? `<script src="${data.script}"></script>` : "")
-    .replace("{{TITLE}}", esc(data.title))
-    .replace("{{DESC}}", esc(data.desc))
-    .replace("{{CANONICAL}}", SITE + page.path)
+    .replaceAll("{{TITLE}}", esc(data.title))
+    .replaceAll("{{DESC}}", esc(data.desc))
+    .replaceAll("{{CANONICAL}}", SITE + page.path)
     .replace("{{PLACEHOLDER}}", data.placeholder)
     .replace("{{PAGE}}", page.path === "/" ? "emoji" : page.path.replaceAll("/", ""))
     .replace("{{TABS}}", tabs)
@@ -186,4 +186,4 @@ for (const page of PAGES) {
   const count = data.groups.reduce((n, g) => n + g.items.length, 0);
   console.log(`✓ ${page.path.padEnd(11)} ${data.main ? "trang tạo chữ" : `${count} mục, ${data.groups.length} nhóm`}`);
 }
-for (const f of ["base.css", "style.css", "app.js", "chu-kieu.js", "favicon.svg", "logo.svg"]) copyFileSync(`src/${f}`, `dist/${f}`);
+for (const f of ["base.css", "style.css", "app.js", "chu-kieu.js", "favicon.svg", "logo.svg", "og-image.png"]) copyFileSync(`src/${f}`, `dist/${f}`);
